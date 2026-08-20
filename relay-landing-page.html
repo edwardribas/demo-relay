@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="devely-publish-key" content="94dd5764-692f-4959-9a1d-7e3acde81a6e" />
+  <meta name="description" content="Relay é um espaço de comandos conceitual para avançar no trabalho diário sem perder o foco.">
+  <title>Relay — Seu trabalho a um comando de distância</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --surface: #000000;
+      --fg: #ffffff;
+      --muted: #a1a1a1;
+      --border: #333333;
+      --accent: #ffffff;
+      --accent-soft: color-mix(in oklch, var(--accent) 12%, transparent);
+      --fg-soft: color-mix(in oklch, var(--fg) 7%, transparent);
+      --font-display: Geist, sans-serif;
+      --font-body: Geist, sans-serif;
+      --font-mono: 'Geist Mono', monospace;
+      --fs-h1: clamp(46px, 6.4vw, 72px);
+      --fs-h2: clamp(32px, 4vw, 48px);
+      --fs-h3: 21px;
+      --fs-lead: 19px;
+      --fs-body: 16px;
+      --fs-meta: 13px;
+      --gap-xs: 8px;
+      --gap-sm: 12px;
+      --gap-md: 20px;
+      --gap-lg: 32px;
+      --gap-xl: 56px;
+      --gap-2xl: 96px;
+      --container: 1180px;
+      --gutter: 32px;
+      --radius: 0px;
+      --radius-lg: 0px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    body { position: relative; margin: 0; overflow-x: hidden; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: var(--fs-body); line-height: 1.55; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+    p { text-wrap: pretty; }
+    h1, h2, h3, h4 { text-wrap: balance; }
+    :focus-visible { outline: 2px solid var(--fg); outline-offset: 4px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .skip-link { position: fixed; left: 16px; top: -80px; z-index: 100; padding: 10px 14px; background: var(--fg); color: var(--bg); }
+    .skip-link:focus { top: 16px; }
+    .site-frame { position: absolute; inset: 0 auto; left: 50%; z-index: 25; width: min(100%, var(--container)); height: 100%; transform: translateX(-50%); border-inline: 1px solid var(--border); pointer-events: none; }
+    .container { max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+    .section { padding-block: clamp(64px, 9vw, var(--gap-2xl)); scroll-margin-top: 72px; }
+    .section + .section { border-top: 1px solid var(--border); }
+    .stack { display: flex; flex-direction: column; }
+    .stack > * + * { margin-top: var(--gap-md); }
+    .row { display: flex; align-items: center; gap: var(--gap-md); }
+    .row-between { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-md); }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-lg); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-lg); }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); }
+    .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: var(--gap-xl); align-items: start; }
+    .grid-1-2 { display: grid; grid-template-columns: 1fr 2fr; gap: var(--gap-xl); align-items: start; }
+    .h1, h1 { font-family: var(--font-display); font-size: var(--fs-h1); font-weight: 590; line-height: 1; letter-spacing: -.03em; margin: 0; }
+    .h2, h2 { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 590; line-height: 1.08; letter-spacing: -.025em; margin: 0; }
+    .h3, h3 { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 520; line-height: 1.3; letter-spacing: -.02em; margin: 0; }
+    .lead { font-size: var(--fs-lead); line-height: 1.55; color: var(--muted); max-width: 56ch; margin: 0; }
+    .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 var(--gap-md); }
+    .meta { font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--muted); }
+    .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .topnav { position: sticky; top: 0; z-index: 20; background: color-mix(in oklch, var(--bg) 90%, transparent); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .topnav-inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
+    .topnav .logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -.02em; }
+    .logo-mark { width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid var(--fg); font-family: var(--font-mono); font-size: 11px; }
+    .topnav-inner nav { display: flex; gap: var(--gap-lg); }
+    .topnav-inner nav a { min-height: 44px; display: inline-flex; align-items: center; font-size: 14px; color: var(--muted); }
+    .topnav-inner nav a:hover { color: var(--fg); }
+    .menu-toggle { display: none; width: 44px; height: 44px; padding: 0; place-items: center; background: transparent; color: var(--fg); border: 1px solid var(--border); }
+    .menu-toggle:hover, .menu-toggle[aria-expanded="true"] { border-color: var(--fg); background: var(--fg-soft); }
+    .menu-lines { width: 16px; height: 12px; display: grid; align-content: space-between; }
+    .menu-lines::before, .menu-lines::after { content: ''; height: 1px; background: currentColor; }
+    .topnav .mobile-nav { display: none; border-top: 1px solid var(--border); }
+    .topnav .mobile-nav.open { display: block; }
+    .mobile-nav a { min-height: 52px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); color: var(--fg); }
+    .mobile-nav a::after { content: '→'; font-family: var(--font-mono); color: var(--muted); }
+    .pagefoot { padding-block: var(--gap-xl); color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
+    .pagefoot .row-between { flex-wrap: wrap; gap: var(--gap-md); }
+    .btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 20px; border-radius: var(--radius); border: 1px solid transparent; font-size: 15px; font-weight: 540; letter-spacing: .02em; transition: transform .08s ease, background .15s ease, color .15s ease, border-color .15s ease; }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+    .btn-primary:hover { background: var(--bg); color: var(--fg); }
+    .btn-secondary { background: transparent; color: var(--fg); border-color: var(--border); }
+    .btn-secondary:hover { border-color: var(--fg); background: var(--fg-soft); }
+    .btn[aria-busy="true"] { cursor: wait; background: var(--fg-soft); color: var(--fg); border-color: var(--border); }
+    .btn-ghost { background: transparent; color: var(--fg); border-color: transparent; padding-inline: 8px; }
+    .btn-ghost:hover { background: var(--fg-soft); }
+    .btn-arrow::after { content: '→'; transition: transform .15s ease; }
+    .btn-arrow:hover::after { transform: translateX(3px); }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; }
+    .card-flat { background: transparent; border: 0; padding: 0; }
+    .card-rule { background: transparent; border: 0; border-top: 1px solid var(--fg); padding: 24px 0 0; border-radius: 0; }
+    .feature .feature-mark { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: 0; color: var(--fg); margin-bottom: var(--gap-md); }
+    .feature .feature-mark svg { width: 18px; height: 18px; }
+    .feature h3 { margin-bottom: 6px; }
+    .feature p { margin: 0; color: var(--muted); font-size: 15px; }
+    .capability-list { border-top: 1px solid var(--border); }
+    .capability-row { display: grid; grid-template-columns: 72px minmax(180px, .8fr) 1.2fr; gap: var(--gap-lg); align-items: baseline; padding: 28px 0; border-bottom: 1px solid var(--border); }
+    .capability-row:hover { background: var(--fg-soft); }
+    .capability-index { color: var(--muted); font: 12px var(--font-mono); letter-spacing: .08em; }
+    .capability-row p { margin: 0; max-width: 58ch; color: var(--muted); }
+    .quote { font-family: var(--font-display); font-size: clamp(24px, 2.6vw, 32px); line-height: 1.32; letter-spacing: -.025em; max-width: 32ch; }
+    .quote-author { color: var(--muted); font-size: 14px; margin-top: var(--gap-md); }
+    .quote-mark { font-family: var(--font-display); font-size: 120px; line-height: .7; color: var(--muted); opacity: .35; margin-bottom: -24px; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--fg-soft); color: var(--fg); border: 1px solid var(--border); border-radius: 999px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
+    .tag { display: inline-flex; align-items: center; padding: 4px 10px; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; font-size: 12px; }
+    .ds-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .ds-table th, .ds-table td { padding: 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    .ds-table th { color: var(--muted); font-weight: 500; font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+    .ds-table tbody tr:hover { background: var(--fg-soft); }
+    .ds-table .num-col { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+    .hero { padding-block: clamp(88px, 13vw, 168px) 72px; }
+    .hero-center { text-align: center; max-width: 860px; margin-inline: auto; }
+    .hero h1 { margin-bottom: var(--gap-md); }
+    .hero .lead { margin: 0 auto var(--gap-lg); }
+    .hero-cta { display: inline-flex; gap: var(--gap-sm); flex-wrap: wrap; }
+    .hero-center .hero-cta { justify-content: center; }
+    .hero-note { margin-top: 16px; color: var(--muted); font: 12px var(--font-mono); }
+    .command-shell { margin: 72px auto 0; max-width: 880px; text-align: left; border: 1px solid var(--border); background: var(--surface); box-shadow: 0 32px 100px color-mix(in oklch, var(--fg) 8%, transparent); }
+    .command-bar { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; min-height: 62px; padding: 0 18px; border-bottom: 1px solid var(--border); }
+    .command-input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--fg); font: 16px var(--font-body); }
+    .command-input::placeholder { color: var(--muted); }
+    .key { min-width: 28px; height: 24px; display: inline-grid; place-items: center; border: 1px solid var(--border); color: var(--muted); font: 11px var(--font-mono); }
+    .command-list { padding: 8px; }
+    .command-item { width: 100%; min-height: 52px; display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 12px; padding: 7px 10px; color: var(--fg); background: transparent; border: 0; text-align: left; }
+    .command-item:hover, .command-item[aria-selected="true"] { background: var(--fg-soft); }
+    .command-icon { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid var(--border); font: 11px var(--font-mono); }
+    .command-copy strong { display: block; font-size: 14px; font-weight: 520; }
+    .command-copy span { display: block; margin-top: 1px; color: var(--muted); font-size: 12px; }
+    .command-empty { display: none; padding: 36px 20px; text-align: center; color: var(--muted); }
+    .command-foot { display: flex; justify-content: space-between; gap: 16px; padding: 10px 18px; border-top: 1px solid var(--border); color: var(--muted); font: 11px var(--font-mono); }
+    .workflow-tabs { display: flex; gap: 0; overflow-x: auto; border-bottom: 1px solid var(--border); }
+    .workflow-tab { min-height: 48px; padding: 0 18px; background: transparent; color: var(--muted); border: 0; border-bottom: 1px solid transparent; white-space: nowrap; }
+    .workflow-tab:hover { color: var(--fg); }
+    .workflow-tab[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--fg); }
+    .workflow-panel { display: none; grid-template-columns: .8fr 1.2fr; gap: var(--gap-xl); align-items: center; padding-top: 48px; }
+    .workflow-panel.active { display: grid; }
+    .workflow-demo { min-height: 340px; display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 32px; border: 1px solid var(--border); }
+    .workflow-line { padding: 14px 16px; border: 1px solid var(--border); color: var(--muted); font: 13px var(--font-mono); }
+    .workflow-line.active { color: var(--fg); border-color: var(--fg); }
+    .proof-panel { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-xl); align-items: start; }
+    .proof-slot { min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; border-top: 1px solid var(--fg); padding-top: 24px; }
+    .proof-principles { display: grid; gap: 0; border-top: 1px solid var(--border); }
+    .proof-principle { display: grid; grid-template-columns: 42px 1fr; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .proof-principle span { color: var(--muted); font: 12px var(--font-mono); }
+    .proof-principle p { margin: 0; color: var(--fg); }
+    .pricing-wrap { overflow-x: auto; }
+    .plan-name { display: block; color: var(--fg); font-family: var(--font-body); font-weight: 600; }
+    .price { display: block; margin-top: 4px; color: var(--fg); font: 13px var(--font-mono); }
+    .preview-plan { display: grid; grid-template-columns: .85fr 1.15fr; gap: var(--gap-xl); align-items: start; border-top: 1px solid var(--fg); padding-top: 28px; }
+    .preview-plan h3 { font-size: 30px; }
+    .preview-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--border); }
+    .preview-list li { display: flex; justify-content: space-between; gap: 24px; padding: 14px 0; border-bottom: 1px solid var(--border); color: var(--muted); }
+    .preview-list li::after { content: 'Incluído'; color: var(--fg); font: 12px var(--font-mono); }
+    .cta-strip { text-align: center; }
+    .cta-strip .lead { margin: 16px auto 32px; }
+    .status-toast { position: fixed; right: 24px; bottom: 24px; z-index: 30; max-width: min(360px, calc(100vw - 48px)); padding: 14px 16px; border: 1px solid var(--fg); background: var(--bg); color: var(--fg); transform: translateY(140%); transition: transform .15s cubic-bezier(.2, 0, 0, 1); }
+    .status-toast.show { transform: translateY(0); }
+    @media (max-width: 920px) {
+      :root { --gutter: 20px; }
+      .grid-2, .grid-3, .grid-4, .grid-2-1, .grid-1-2, .workflow-panel, .proof-panel, .preview-plan { grid-template-columns: 1fr; }
+      .topnav-inner nav { display: none; }
+      .topnav .download-action { display: none; }
+      .menu-toggle { display: grid; }
+      .capability-row { grid-template-columns: 42px 1fr; gap: 12px; }
+      .capability-row p { grid-column: 2; }
+      .hero { padding-top: 72px; }
+      .command-shell { margin-top: 48px; }
+      .command-foot { display: none; }
+      .ds-table { min-width: 680px; }
+    }
+    @media (max-width: 560px) {
+      .hero-cta { width: 100%; }
+      .hero-cta .btn { width: 100%; }
+      .command-item { grid-template-columns: 34px 1fr; }
+      .command-item .key { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Pular para o conteúdo</a>
+  <div class="site-frame" aria-hidden="true"></div>
+  <header class="topnav" data-od-id="topnav">
+    <div class="container topnav-inner">
+      <a class="logo" href="#top" aria-label="Página inicial da Relay" data-od-id="brand-link"><span class="logo-mark">R</span>Relay</a>
+      <nav aria-label="Navegação principal">
+        <a href="#features">Recursos</a><a href="#workflow">Fluxo</a><a href="#proof">Avaliação</a><a href="#pricing">Acesso</a>
+      </nav>
+      <button class="btn btn-secondary download-action" data-od-id="nav-download">Baixar</button>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir navegação" data-od-id="mobile-menu-toggle"><span class="menu-lines" aria-hidden="true"></span></button>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Navegação móvel" data-od-id="mobile-navigation">
+      <div class="container"><a href="#features">Recursos</a><a href="#workflow">Fluxo</a><a href="#proof">Avaliação</a><a href="#pricing">Acesso</a></div>
+    </nav>
+  </header>
+
+  <main id="content">
+    <section class="section hero" id="top" data-od-id="hero">
+      <div class="container hero-center">
+        <p class="eyebrow">Comande seu trabalho</p>
+        <h1 data-od-id="hero-heading">O que você precisar.
+A um comando de distância.</h1>
+        <p class="lead">A Relay reúne busca, ações e ferramentas diárias em um único espaço ágil — para você manter o ritmo sem tirar as mãos do teclado.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary download-action" data-od-id="hero-download">Baixar para macOS</button>
+          <a class="btn btn-secondary" href="#workflow" data-od-id="hero-demo">Testar o fluxo</a>
+        </div>
+        <p class="hero-note">Protótipo conceitual · ação de baixar simulada</p>
+
+        <div class="command-shell" data-od-id="command-demo">
+          <label class="command-bar" for="command-search">
+            <span class="sr-only">Buscar comandos</span>
+            <span aria-hidden="true">⌕</span>
+            <input class="command-input" id="command-search" type="search" role="combobox" placeholder="Busque comandos, aplicativos e arquivos…" autocomplete="off" aria-autocomplete="list" aria-expanded="true" aria-controls="command-list">
+            <span class="key">⌘ K</span>
+          </label>
+          <div class="command-list" id="command-list" role="listbox" aria-label="Comandos disponíveis">
+            <button class="command-item" id="command-focus" role="option" aria-selected="true" data-search="iniciar sessão de foco cronômetro">
+              <span class="command-icon">01</span><span class="command-copy"><strong>Iniciar sessão de foco</strong><span>Bloqueie distrações por 25 minutos</span></span><span class="key">↵</span>
+            </button>
+            <button class="command-item" id="command-project" role="option" aria-selected="false" data-search="buscar projeto recente arquivos">
+              <span class="command-icon">02</span><span class="command-copy"><strong>Encontrar projeto recente</strong><span>Busque arquivos em todo o seu espaço</span></span><span class="key">⌘ P</span>
+            </button>
+            <button class="command-item" id="command-note" role="option" aria-selected="false" data-search="capturar pensamento nota caixa de entrada">
+              <span class="command-icon">03</span><span class="command-copy"><strong>Capturar uma ideia</strong><span>Envie uma nota para sua caixa de entrada</span></span><span class="key">⌘ N</span>
+            </button>
+            <div class="command-empty" id="command-empty">Nenhum comando encontrado. Tente “foco” ou “nota”.</div>
+          </div>
+          <div class="command-foot"><span>↑↓ Navegar · ↵ Abrir</span><span>Interação real do produto</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features" data-od-id="features">
+      <div class="container stack" style="gap: 56px;">
+        <div style="max-width: 40ch;">
+          <p class="eyebrow">Feito para manter o fluxo</p>
+          <h2 data-od-id="features-heading">Um caminho mais rápido da intenção à ação.</h2>
+        </div>
+        <div class="capability-list">
+          <article class="capability-row" data-od-id="feature-universal-search"><span class="capability-index">01</span><h3>Busca universal</h3><p>Encontre comandos, documentos, configurações e trabalhos recentes em uma interface consistente.</p></article>
+          <article class="capability-row" data-od-id="feature-actions"><span class="capability-index">02</span><h3>Ações pelo teclado</h3><p>Execute fluxos recorrentes sem trocar de janela, procurar em menus ou alcançar o mouse.</p></article>
+          <article class="capability-row" data-od-id="feature-extensions"><span class="capability-index">03</span><h3>Suas ferramentas, do seu jeito</h3><p>Conecte os serviços que você já usa e escolha exatamente quais ações aparecem na Relay.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workflow" data-od-id="workflow">
+      <div class="container">
+        <div class="row-between" style="align-items: end; margin-bottom: 48px;">
+          <div style="max-width: 42ch;"><p class="eyebrow">Uma interface, muitas tarefas</p><h2 data-od-id="workflow-heading">Mantenha o raciocínio. Mude a tarefa.</h2></div>
+          <p class="lead">Alterne as abas para ver como a Relay mantém ações comuns em um ritmo previsível.</p>
+        </div>
+        <div class="workflow-tabs" role="tablist" aria-label="Exemplos de fluxo" data-od-id="workflow-tabs">
+          <button class="workflow-tab" role="tab" aria-selected="true" aria-controls="panel-plan" id="tab-plan">Planejar</button>
+          <button class="workflow-tab" role="tab" aria-selected="false" aria-controls="panel-find" id="tab-find" tabindex="-1">Encontrar</button>
+          <button class="workflow-tab" role="tab" aria-selected="false" aria-controls="panel-act" id="tab-act" tabindex="-1">Agir</button>
+        </div>
+        <div class="workflow-panel active" id="panel-plan" role="tabpanel" aria-labelledby="tab-plan">
+          <div><span class="pill">01 · Planejar</span><h3 style="font-size: 30px; margin-top: 20px;">Transforme informações dispersas em um próximo passo claro.</h3><p class="lead" style="margin-top: 12px;">Reúna eventos, tarefas abertas e notas de hoje em uma visão focada.</p></div>
+          <div class="workflow-demo" aria-label="Prévia do fluxo de planejamento"><div class="workflow-line">Calendário · Revisão do projeto às 10h</div><div class="workflow-line active">Próxima ação · Preparar apresentação do protótipo</div><div class="workflow-line">Entrada · 3 notas aguardando</div></div>
+        </div>
+        <div class="workflow-panel" id="panel-find" role="tabpanel" aria-labelledby="tab-find" hidden="">
+          <div><span class="pill">02 · Encontrar</span><h3 style="font-size: 30px; margin-top: 20px;">Busque pelo significado, não pela memória.</h3><p class="lead" style="margin-top: 12px;">Use linguagem natural para chegar a documentos, pessoas e projetos recentes.</p></div>
+          <div class="workflow-demo" aria-label="Prévia do fluxo de busca"><div class="workflow-line">Busca · “o documento de lançamento da semana passada”</div><div class="workflow-line active">Encontrado · Documento de lançamento do produto</div><div class="workflow-line">Ação · Abrir no espaço de trabalho</div></div>
+        </div>
+        <div class="workflow-panel" id="panel-act" role="tabpanel" aria-labelledby="tab-act" hidden="">
+          <div><span class="pill">03 · Agir</span><h3 style="font-size: 30px; margin-top: 20px;">Resolva as pequenas tarefas enquanto ainda são pequenas.</h3><p class="lead" style="margin-top: 12px;">Envie, agende, capture e atualize sem abrir outra janela de aplicativo.</p></div>
+          <div class="workflow-demo" aria-label="Prévia do fluxo de ação"><div class="workflow-line">Comando · Agendar bloco de foco</div><div class="workflow-line active">Horário · Amanhã, 09h–10h30</div><div class="workflow-line">Resultado · Pronto para confirmar</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proof" data-od-id="customer-proof">
+      <div class="container proof-panel">
+        <div><p class="eyebrow">Evidência antes do endosso</p><h2 data-od-id="proof-heading">Teste o fluxo. Ignore o exagero.</h2><p class="lead" style="margin-top: 20px;">A Relay é um produto conceitual, por isso não usa promessas emprestadas nem apresenta clientes fictícios.</p></div>
+        <div class="proof-slot" data-od-id="evaluation-principles">
+          <span class="meta">PADRÃO DE AVALIAÇÃO</span>
+          <div class="proof-principles">
+            <div class="proof-principle"><span>01</span><p>Traga uma tarefa real que você repete toda semana.</p></div>
+            <div class="proof-principle"><span>02</span><p>Conclua sem sair da interface de comandos.</p></div>
+            <div class="proof-principle"><span>03</span><p>Fique com a Relay apenas se o fluxo for claramente melhor.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing" data-od-id="pricing">
+      <div class="container">
+        <div style="max-width: 42ch; margin-bottom: 56px;"><p class="eyebrow">Acesso à prévia</p><h2 data-od-id="pricing-heading">Avalie o conceito completo do produto.</h2><p class="lead" style="margin-top: 16px;">Este protótipo não representa preços comerciais nem um fluxo de pagamento.</p></div>
+        <div class="preview-plan" data-od-id="preview-plan">
+          <div><span class="meta">VERSÃO CONCEITUAL</span><h3 style="margin-top: 12px;">Uma experiência completa de avaliação.</h3><p class="lead" style="margin-top: 12px;">Use a interface funcional, teste a navegação e avalie o modelo de interação antes de qualquer promessa de preço.</p></div>
+          <ul class="preview-list" aria-label="A versão conceitual inclui"><li>Busca por comandos</li><li>Navegação por teclado</li><li>Exemplos de fluxo</li><li>Interface responsiva</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-strip" data-od-id="cta-strip">
+      <div class="container" style="max-width: 660px;"><h2>Torne sua próxima ação a mais simples.</h2><p class="lead">Baixe a versão conceitual e experimente um fluxo de comandos mais tranquilo.</p><button class="btn btn-primary download-action" data-od-id="closing-download">Baixar para macOS</button></div>
+    </section>
+  </main>
+
+  <footer class="pagefoot" data-od-id="footer">
+    <div class="container row-between"><span>© 2026 Relay · Produto conceitual</span><span class="meta">Privacidade · Termos · Status do sistema</span></div>
+  </footer>
+  <div class="status-toast" id="status-toast" role="status" aria-live="polite">A ação de baixar é simulada neste protótipo.</div>
+
+  <script>
+    const menuToggle = document.querySelector('#menu-toggle');
+    const mobileNav = document.querySelector('#mobile-nav');
+    function closeMenu() {
+      mobileNav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Abrir navegação');
+    }
+    menuToggle.addEventListener('click', () => {
+      const open = menuToggle.getAttribute('aria-expanded') === 'true';
+      if (open) closeMenu();
+      else {
+        mobileNav.classList.add('open');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        menuToggle.setAttribute('aria-label', 'Fechar navegação');
+      }
+    });
+    mobileNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+        menuToggle.focus();
+      }
+    });
+
+    const search = document.querySelector('#command-search');
+    const items = [...document.querySelectorAll('.command-item')];
+    const empty = document.querySelector('#command-empty');
+    function selectCommand(item, moveFocus = false) {
+      items.forEach((entry) => entry.setAttribute('aria-selected', entry === item ? 'true' : 'false'));
+      if (item) {
+        search.setAttribute('aria-activedescendant', item.id);
+        if (moveFocus) item.focus();
+      } else search.removeAttribute('aria-activedescendant');
+    }
+    function filterCommands() {
+      const query = search.value.trim().toLowerCase();
+      let visible = 0;
+      items.forEach((item) => {
+        const match = item.dataset.search.includes(query) || item.innerText.toLowerCase().includes(query);
+        item.hidden = !match;
+        if (match) visible += 1;
+      });
+      empty.style.display = visible ? 'none' : 'block';
+      const first = items.find((item) => !item.hidden);
+      selectCommand(first);
+    }
+    search.addEventListener('input', filterCommands);
+    document.addEventListener('keydown', (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); search.focus(); }
+      if (event.key === 'Escape' && document.activeElement === search) { search.value = ''; filterCommands(); search.blur(); }
+    });
+    search.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp' && event.key !== 'Enter') return;
+      const visibleItems = items.filter((item) => !item.hidden);
+      if (!visibleItems.length) return;
+      event.preventDefault();
+      const selected = visibleItems.find((item) => item.getAttribute('aria-selected') === 'true') || visibleItems[0];
+      if (event.key === 'Enter') selected.click();
+      else {
+        const direction = event.key === 'ArrowDown' ? 1 : -1;
+        const next = visibleItems[(visibleItems.indexOf(selected) + direction + visibleItems.length) % visibleItems.length];
+        selectCommand(next);
+      }
+    });
+    items.forEach((item) => item.addEventListener('click', () => {
+      selectCommand(item);
+      showToast(item.querySelector('strong').textContent + ' selecionado.');
+    }));
+
+    const tabs = [...document.querySelectorAll('.workflow-tab')];
+    const panels = [...document.querySelectorAll('.workflow-panel')];
+    function activateTab(tab, moveFocus = true) {
+      tabs.forEach((entry) => entry.setAttribute('aria-selected', 'false'));
+      tabs.forEach((entry) => entry.setAttribute('tabindex', '-1'));
+      panels.forEach((panel) => { panel.classList.remove('active'); panel.hidden = true; });
+      tab.setAttribute('aria-selected', 'true');
+      tab.setAttribute('tabindex', '0');
+      const panel = document.querySelector('#' + tab.getAttribute('aria-controls'));
+      panel.hidden = false;
+      panel.classList.add('active');
+      if (moveFocus) tab.focus();
+    }
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => activateTab(tab));
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const current = tabs.indexOf(tab);
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (current + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        activateTab(tabs[next]);
+      });
+    });
+
+    const toast = document.querySelector('#status-toast');
+    let toastTimer;
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+    document.querySelectorAll('.download-action').forEach((button) => button.addEventListener('click', () => {
+      const original = button.textContent;
+      button.setAttribute('aria-busy', 'true');
+      button.disabled = true;
+      button.textContent = 'Preparando…';
+      setTimeout(() => {
+        button.removeAttribute('aria-busy');
+        button.disabled = false;
+        button.textContent = original;
+        showToast('Versão conceitual indisponível — este protótipo não inclui um aplicativo para instalar.');
+      }, 650);
+    }));
+  </script>
+
+
+</body></html>
