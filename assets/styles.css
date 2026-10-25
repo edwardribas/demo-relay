@@ -820,11 +820,13 @@ h3 {
   padding: 14px 16px;
   border: 1px solid var(--fg);
   background: var(--bg);
-  transform: translateY(140%);
+  pointer-events: none;
+  transform: translateY(calc(100% + 32px));
   transition: transform 0.15s var(--ease);
 }
 
 .status-toast.is-visible {
+  pointer-events: auto;
   transform: translateY(0);
 }
 
