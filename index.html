@@ -1,459 +1,349 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Chave usada pela Devely para publicar esta página. Não remove. -->
-    <meta
-      name="devely-publish-key"
-      content="dbc0d899-918b-4139-bea2-2c3bb2bb650f"
-    />
-    <meta
-      name="description"
-      content="Relay é um espaço de comandos conceitual para avançar no trabalho diário sem perder o foco."
-    />
-    <title>Relay — Seu trabalho a um comando de distância</title>
-    <link rel="stylesheet" href="assets/styles.css" />
-    <script src="assets/script.js" defer></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#content">Pular para o conteúdo</a>
-    <div class="site-frame" aria-hidden="true"></div>
 
-    <header class="topnav" data-od-id="topnav">
-      <div class="container topnav-inner">
-        <a
-          class="logo"
-          href="#top"
-          aria-label="Página inicial da Relay"
-          data-od-id="brand-link"
-        >
-          <span class="logo-mark">R</span>
-          Relay
-        </a>
-        <nav class="primary-nav" aria-label="Navegação principal">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chave usada pela Devely para publicar esta página. Não remove. -->
+  <meta name="devely-solution-id" content="2719d261-9ed1-4012-98e6-07c43b6b84c0" />
+  <meta name="description"
+    content="Relay é um espaço de comandos conceitual para avançar no trabalho diário sem perder o foco." />
+  <title>Relay — Seu trabalho a um comando de distância</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="assets/script.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Pular para o conteúdo</a>
+  <div class="site-frame" aria-hidden="true"></div>
+
+  <header class="topnav" data-od-id="topnav">
+    <div class="container topnav-inner">
+      <a class="logo" href="#top" aria-label="Página inicial da Relay" data-od-id="brand-link">
+        <span class="logo-mark">R</span>
+        Relay
+      </a>
+      <nav class="primary-nav" aria-label="Navegação principal">
+        <a href="#features">Recursos</a>
+        <a href="#workflow">Fluxo</a>
+        <a href="#proof">Avaliação</a>
+        <a href="#pricing">Acesso</a>
+      </nav>
+      <button class="btn btn-secondary download-action" type="button" data-od-id="nav-download">
+        Baixar para macOS
+      </button>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav"
+        aria-label="Abrir navegação" data-od-id="mobile-menu-toggle">
+        <span class="menu-lines" aria-hidden="true"></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Navegação móvel" data-od-id="mobile-navigation" inert>
+      <div class="mobile-nav-inner">
+        <div class="container">
           <a href="#features">Recursos</a>
           <a href="#workflow">Fluxo</a>
           <a href="#proof">Avaliação</a>
           <a href="#pricing">Acesso</a>
-        </nav>
-        <button
-          class="btn btn-secondary download-action"
-          type="button"
-          data-od-id="nav-download"
-        >
-          Baixar para macOS
-        </button>
-        <button
-          class="menu-toggle"
-          id="menu-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="mobile-nav"
-          aria-label="Abrir navegação"
-          data-od-id="mobile-menu-toggle"
-        >
-          <span class="menu-lines" aria-hidden="true"></span>
-        </button>
+        </div>
       </div>
-      <nav
-        class="mobile-nav"
-        id="mobile-nav"
-        aria-label="Navegação móvel"
-        data-od-id="mobile-navigation"
-        inert
-      >
-        <div class="mobile-nav-inner">
-          <div class="container">
-            <a href="#features">Recursos</a>
-            <a href="#workflow">Fluxo</a>
-            <a href="#proof">Avaliação</a>
-            <a href="#pricing">Acesso</a>
-          </div>
-        </div>
-      </nav>
-    </header>
+    </nav>
+  </header>
 
-    <main id="content">
-      <section class="section hero" id="top" data-od-id="hero">
-        <div class="container">
-          <div class="hero-center">
-            <p class="eyebrow">Comande seu trabalho</p>
-            <h1 data-od-id="hero-heading">
-              O que você precisar. A um comando de distância.
-            </h1>
-            <p class="lead">
-              A Relay reúne busca, ações e ferramentas diárias em um único
-              espaço ágil — para você manter o ritmo sem tirar as mãos do
-              teclado.
-            </p>
-            <div class="hero-cta">
-              <button
-                class="btn btn-primary download-action"
-                type="button"
-                data-od-id="hero-download"
-              >
-                Baixar para macOS
-              </button>
-              <a class="btn btn-secondary" href="#workflow" data-od-id="hero-demo">
-                Testar o fluxo
-              </a>
-            </div>
-            <p class="hero-note">Protótipo conceitual · ação de baixar simulada</p>
-          </div>
-
-          <div class="command-shell" data-od-id="command-demo">
-            <label class="command-bar" for="command-search">
-              <span class="sr-only">Buscar comandos</span>
-              <span aria-hidden="true">⌕</span>
-              <input
-                class="command-input"
-                id="command-search"
-                type="search"
-                role="combobox"
-                placeholder="Busque comandos, aplicativos e arquivos…"
-                autocomplete="off"
-                aria-autocomplete="list"
-                aria-expanded="true"
-                aria-controls="command-list"
-              />
-              <span class="key">⌘ K</span>
-            </label>
-            <div
-              class="command-list"
-              id="command-list"
-              role="listbox"
-              aria-label="Comandos disponíveis"
-            >
-              <button
-                class="command-item"
-                id="command-focus"
-                type="button"
-                role="option"
-                aria-selected="true"
-                data-search="iniciar sessão de foco cronômetro"
-              >
-                <span class="command-icon">01</span>
-                <span class="command-copy">
-                  <strong>Iniciar sessão de foco</strong>
-                  <span>Bloqueie distrações por 25 minutos</span>
-                </span>
-                <span class="key">↵</span>
-              </button>
-              <button
-                class="command-item"
-                id="command-project"
-                type="button"
-                role="option"
-                aria-selected="false"
-                data-search="buscar projeto recente arquivos"
-              >
-                <span class="command-icon">02</span>
-                <span class="command-copy">
-                  <strong>Encontrar projeto recente</strong>
-                  <span>Busque arquivos em todo o seu espaço</span>
-                </span>
-                <span class="key">⌘ P</span>
-              </button>
-              <button
-                class="command-item"
-                id="command-note"
-                type="button"
-                role="option"
-                aria-selected="false"
-                data-search="capturar pensamento nota caixa de entrada"
-              >
-                <span class="command-icon">03</span>
-                <span class="command-copy">
-                  <strong>Capturar uma ideia</strong>
-                  <span>Envie uma nota para sua caixa de entrada</span>
-                </span>
-                <span class="key">⌘ N</span>
-              </button>
-              <p class="command-empty" hidden>
-                Nenhum comando encontrado. Tente “foco” ou “nota”.
-              </p>
-            </div>
-            <div class="command-foot">
-              <span>↑↓ Navegar · ↵ Abrir</span>
-              <span>Interação real do produto</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features" data-od-id="features">
-        <div class="container features">
-          <div class="intro">
-            <p class="eyebrow">Feito para manter o fluxo</p>
-            <h2 data-od-id="features-heading">
-              Um caminho mais rápido da intenção à ação.
-            </h2>
-          </div>
-          <div class="capability-list">
-            <article class="capability-row" data-od-id="feature-universal-search">
-              <span class="capability-index">01</span>
-              <h3>Busca universal</h3>
-              <p>
-                Encontre comandos, documentos, configurações e trabalhos recentes
-                em uma interface consistente.
-              </p>
-            </article>
-            <article class="capability-row" data-od-id="feature-actions">
-              <span class="capability-index">02</span>
-              <h3>Ações pelo teclado</h3>
-              <p>
-                Execute fluxos recorrentes sem trocar de janela, procurar em
-                menus ou alcançar o mouse.
-              </p>
-            </article>
-            <article class="capability-row" data-od-id="feature-extensions">
-              <span class="capability-index">03</span>
-              <h3>Suas ferramentas, do seu jeito</h3>
-              <p>
-                Conecte os serviços que você já usa e escolha exatamente quais
-                ações aparecem na Relay.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="workflow" data-od-id="workflow">
-        <div class="container">
-          <div class="section-head">
-            <div class="intro">
-              <p class="eyebrow">Uma interface, muitas tarefas</p>
-              <h2 data-od-id="workflow-heading">
-                Mantenha o raciocínio. Mude a tarefa.
-              </h2>
-            </div>
-            <p class="lead">
-              Alterne as abas para ver como a Relay mantém ações comuns em um
-              ritmo previsível.
-            </p>
-          </div>
-
-          <div
-            class="workflow-tabs"
-            role="tablist"
-            aria-label="Exemplos de fluxo"
-            data-od-id="workflow-tabs"
-          >
-            <button
-              class="workflow-tab"
-              type="button"
-              role="tab"
-              aria-selected="true"
-              aria-controls="panel-plan"
-              id="tab-plan"
-            >
-              Planejar
-            </button>
-            <button
-              class="workflow-tab"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="panel-find"
-              id="tab-find"
-              tabindex="-1"
-            >
-              Encontrar
-            </button>
-            <button
-              class="workflow-tab"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="panel-act"
-              id="tab-act"
-              tabindex="-1"
-            >
-              Agir
-            </button>
-          </div>
-
-          <div
-            class="workflow-panel"
-            id="panel-plan"
-            role="tabpanel"
-            aria-labelledby="tab-plan"
-          >
-            <div>
-              <span class="pill">01 · Planejar</span>
-              <h3 class="panel-title">
-                Transforme informações dispersas em um próximo passo claro.
-              </h3>
-              <p class="lead">
-                Reúna eventos, tarefas abertas e notas de hoje em uma visão
-                focada.
-              </p>
-            </div>
-            <div class="workflow-demo" aria-label="Prévia do fluxo de planejamento">
-              <div class="workflow-line">Calendário · Revisão do projeto às 10h</div>
-              <div class="workflow-line is-active">
-                Próxima ação · Preparar apresentação do protótipo
-              </div>
-              <div class="workflow-line">Entrada · 3 notas aguardando</div>
-            </div>
-          </div>
-
-          <div
-            class="workflow-panel"
-            id="panel-find"
-            role="tabpanel"
-            aria-labelledby="tab-find"
-            hidden
-          >
-            <div>
-              <span class="pill">02 · Encontrar</span>
-              <h3 class="panel-title">Busque pelo significado, não pela memória.</h3>
-              <p class="lead">
-                Use linguagem natural para chegar a documentos, pessoas e
-                projetos recentes.
-              </p>
-            </div>
-            <div class="workflow-demo" aria-label="Prévia do fluxo de busca">
-              <div class="workflow-line">
-                Busca · “o documento de lançamento da semana passada”
-              </div>
-              <div class="workflow-line is-active">
-                Encontrado · Documento de lançamento do produto
-              </div>
-              <div class="workflow-line">Ação · Abrir no espaço de trabalho</div>
-            </div>
-          </div>
-
-          <div
-            class="workflow-panel"
-            id="panel-act"
-            role="tabpanel"
-            aria-labelledby="tab-act"
-            hidden
-          >
-            <div>
-              <span class="pill">03 · Agir</span>
-              <h3 class="panel-title">
-                Resolva as pequenas tarefas enquanto ainda são pequenas.
-              </h3>
-              <p class="lead">
-                Envie, agende, capture e atualize sem abrir outra janela de
-                aplicativo.
-              </p>
-            </div>
-            <div class="workflow-demo" aria-label="Prévia do fluxo de ação">
-              <div class="workflow-line">Comando · Agendar bloco de foco</div>
-              <div class="workflow-line is-active">Horário · Amanhã, 09h–10h30</div>
-              <div class="workflow-line">Resultado · Pronto para confirmar</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="proof" data-od-id="customer-proof">
-        <div class="container proof-panel">
-          <div>
-            <p class="eyebrow">Evidência antes do endosso</p>
-            <h2 data-od-id="proof-heading">Teste o fluxo. Ignore o exagero.</h2>
-            <p class="lead">
-              A Relay é um produto conceitual, por isso não usa promessas
-              emprestadas nem apresenta clientes fictícios.
-            </p>
-          </div>
-          <div class="proof-slot" data-od-id="evaluation-principles">
-            <span class="meta">Padrão de avaliação</span>
-            <div class="proof-principles">
-              <div class="proof-principle">
-                <span>01</span>
-                <p>Traga uma tarefa real que você repete toda semana.</p>
-              </div>
-              <div class="proof-principle">
-                <span>02</span>
-                <p>Conclua sem sair da interface de comandos.</p>
-              </div>
-              <div class="proof-principle">
-                <span>03</span>
-                <p>Fique com a Relay apenas se o fluxo for claramente melhor.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="pricing" data-od-id="pricing">
-        <div class="container">
-          <div class="intro">
-            <p class="eyebrow">Acesso à prévia</p>
-            <h2 data-od-id="pricing-heading">
-              Avalie o conceito completo do produto.
-            </h2>
-            <p class="lead">
-              Este protótipo não representa preços comerciais nem um fluxo de
-              pagamento.
-            </p>
-          </div>
-          <div class="preview-plan" data-od-id="preview-plan">
-            <div>
-              <span class="meta">Versão conceitual</span>
-              <h3 class="panel-title">Uma experiência completa de avaliação.</h3>
-              <p class="lead">
-                Use a interface funcional, teste a navegação e avalie o modelo
-                de interação antes de qualquer promessa de preço.
-              </p>
-            </div>
-            <ul class="preview-list" aria-label="A versão conceitual inclui">
-              <li>
-                <span>Busca por comandos</span>
-                <span class="included">Incluído</span>
-              </li>
-              <li>
-                <span>Navegação por teclado</span>
-                <span class="included">Incluído</span>
-              </li>
-              <li>
-                <span>Exemplos de fluxo</span>
-                <span class="included">Incluído</span>
-              </li>
-              <li>
-                <span>Interface responsiva</span>
-                <span class="included">Incluído</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="section cta-strip" data-od-id="cta-strip">
-        <div class="container narrow">
-          <h2>Torne sua próxima ação a mais simples.</h2>
+  <main id="content">
+    <section class="section hero" id="top" data-od-id="hero">
+      <div class="container">
+        <div class="hero-center">
+          <p class="eyebrow">Comande seu trabalho</p>
+          <h1 data-od-id="hero-heading">
+            O que você precisar. A um comando de distância.
+          </h1>
           <p class="lead">
-            Baixe a versão conceitual e experimente um fluxo de comandos mais
-            tranquilo.
+            A Relay reúne busca, ações e ferramentas diárias em um único
+            espaço ágil — para você manter o ritmo sem tirar as mãos do
+            teclado.
           </p>
-          <button
-            class="btn btn-primary download-action"
-            type="button"
-            data-od-id="closing-download"
-          >
-            Baixar para macOS
+          <div class="hero-cta">
+            <button class="btn btn-primary download-action" type="button" data-od-id="hero-download">
+              Baixar para macOS
+            </button>
+            <a class="btn btn-secondary" href="#workflow" data-od-id="hero-demo">
+              Testar o fluxo
+            </a>
+          </div>
+          <p class="hero-note">Protótipo conceitual · ação de baixar simulada</p>
+        </div>
+
+        <div class="command-shell" data-od-id="command-demo">
+          <label class="command-bar" for="command-search">
+            <span class="sr-only">Buscar comandos</span>
+            <span aria-hidden="true">⌕</span>
+            <input class="command-input" id="command-search" type="search" role="combobox"
+              placeholder="Busque comandos, aplicativos e arquivos…" autocomplete="off" aria-autocomplete="list"
+              aria-expanded="true" aria-controls="command-list" />
+            <span class="key">⌘ K</span>
+          </label>
+          <div class="command-list" id="command-list" role="listbox" aria-label="Comandos disponíveis">
+            <button class="command-item" id="command-focus" type="button" role="option" aria-selected="true"
+              data-search="iniciar sessão de foco cronômetro">
+              <span class="command-icon">01</span>
+              <span class="command-copy">
+                <strong>Iniciar sessão de foco</strong>
+                <span>Bloqueie distrações por 25 minutos</span>
+              </span>
+              <span class="key">↵</span>
+            </button>
+            <button class="command-item" id="command-project" type="button" role="option" aria-selected="false"
+              data-search="buscar projeto recente arquivos">
+              <span class="command-icon">02</span>
+              <span class="command-copy">
+                <strong>Encontrar projeto recente</strong>
+                <span>Busque arquivos em todo o seu espaço</span>
+              </span>
+              <span class="key">⌘ P</span>
+            </button>
+            <button class="command-item" id="command-note" type="button" role="option" aria-selected="false"
+              data-search="capturar pensamento nota caixa de entrada">
+              <span class="command-icon">03</span>
+              <span class="command-copy">
+                <strong>Capturar uma ideia</strong>
+                <span>Envie uma nota para sua caixa de entrada</span>
+              </span>
+              <span class="key">⌘ N</span>
+            </button>
+            <p class="command-empty" hidden>
+              Nenhum comando encontrado. Tente “foco” ou “nota”.
+            </p>
+          </div>
+          <div class="command-foot">
+            <span>↑↓ Navegar · ↵ Abrir</span>
+            <span>Interação real do produto</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features" data-od-id="features">
+      <div class="container features">
+        <div class="intro">
+          <p class="eyebrow">Feito para manter o fluxo</p>
+          <h2 data-od-id="features-heading">
+            Um caminho mais rápido da intenção à ação.
+          </h2>
+        </div>
+        <div class="capability-list">
+          <article class="capability-row" data-od-id="feature-universal-search">
+            <span class="capability-index">01</span>
+            <h3>Busca universal</h3>
+            <p>
+              Encontre comandos, documentos, configurações e trabalhos recentes
+              em uma interface consistente.
+            </p>
+          </article>
+          <article class="capability-row" data-od-id="feature-actions">
+            <span class="capability-index">02</span>
+            <h3>Ações pelo teclado</h3>
+            <p>
+              Execute fluxos recorrentes sem trocar de janela, procurar em
+              menus ou alcançar o mouse.
+            </p>
+          </article>
+          <article class="capability-row" data-od-id="feature-extensions">
+            <span class="capability-index">03</span>
+            <h3>Suas ferramentas, do seu jeito</h3>
+            <p>
+              Conecte os serviços que você já usa e escolha exatamente quais
+              ações aparecem na Relay.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workflow" data-od-id="workflow">
+      <div class="container">
+        <div class="section-head">
+          <div class="intro">
+            <p class="eyebrow">Uma interface, muitas tarefas</p>
+            <h2 data-od-id="workflow-heading">
+              Mantenha o raciocínio. Mude a tarefa.
+            </h2>
+          </div>
+          <p class="lead">
+            Alterne as abas para ver como a Relay mantém ações comuns em um
+            ritmo previsível.
+          </p>
+        </div>
+
+        <div class="workflow-tabs" role="tablist" aria-label="Exemplos de fluxo" data-od-id="workflow-tabs">
+          <button class="workflow-tab" type="button" role="tab" aria-selected="true" aria-controls="panel-plan"
+            id="tab-plan">
+            Planejar
+          </button>
+          <button class="workflow-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-find"
+            id="tab-find" tabindex="-1">
+            Encontrar
+          </button>
+          <button class="workflow-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-act"
+            id="tab-act" tabindex="-1">
+            Agir
           </button>
         </div>
-      </section>
-    </main>
 
-    <footer class="pagefoot" data-od-id="footer">
-      <div class="container pagefoot-inner">
-        <span>© 2026 Relay · Produto conceitual</span>
-        <span>Protótipo de estudo, sem conta, pagamento ou instalação.</span>
+        <div class="workflow-panel" id="panel-plan" role="tabpanel" aria-labelledby="tab-plan">
+          <div>
+            <span class="pill">01 · Planejar</span>
+            <h3 class="panel-title">
+              Transforme informações dispersas em um próximo passo claro.
+            </h3>
+            <p class="lead">
+              Reúna eventos, tarefas abertas e notas de hoje em uma visão
+              focada.
+            </p>
+          </div>
+          <div class="workflow-demo" aria-label="Prévia do fluxo de planejamento">
+            <div class="workflow-line">Calendário · Revisão do projeto às 10h</div>
+            <div class="workflow-line is-active">
+              Próxima ação · Preparar apresentação do protótipo
+            </div>
+            <div class="workflow-line">Entrada · 3 notas aguardando</div>
+          </div>
+        </div>
+
+        <div class="workflow-panel" id="panel-find" role="tabpanel" aria-labelledby="tab-find" hidden>
+          <div>
+            <span class="pill">02 · Encontrar</span>
+            <h3 class="panel-title">Busque pelo significado, não pela memória.</h3>
+            <p class="lead">
+              Use linguagem natural para chegar a documentos, pessoas e
+              projetos recentes.
+            </p>
+          </div>
+          <div class="workflow-demo" aria-label="Prévia do fluxo de busca">
+            <div class="workflow-line">
+              Busca · “o documento de lançamento da semana passada”
+            </div>
+            <div class="workflow-line is-active">
+              Encontrado · Documento de lançamento do produto
+            </div>
+            <div class="workflow-line">Ação · Abrir no espaço de trabalho</div>
+          </div>
+        </div>
+
+        <div class="workflow-panel" id="panel-act" role="tabpanel" aria-labelledby="tab-act" hidden>
+          <div>
+            <span class="pill">03 · Agir</span>
+            <h3 class="panel-title">
+              Resolva as pequenas tarefas enquanto ainda são pequenas.
+            </h3>
+            <p class="lead">
+              Envie, agende, capture e atualize sem abrir outra janela de
+              aplicativo.
+            </p>
+          </div>
+          <div class="workflow-demo" aria-label="Prévia do fluxo de ação">
+            <div class="workflow-line">Comando · Agendar bloco de foco</div>
+            <div class="workflow-line is-active">Horário · Amanhã, 09h–10h30</div>
+            <div class="workflow-line">Resultado · Pronto para confirmar</div>
+          </div>
+        </div>
       </div>
-    </footer>
+    </section>
 
-    <div
-      class="status-toast"
-      id="status-toast"
-      role="status"
-      aria-live="polite"
-    ></div>
-  </body>
+    <section class="section" id="proof" data-od-id="customer-proof">
+      <div class="container proof-panel">
+        <div>
+          <p class="eyebrow">Evidência antes do endosso</p>
+          <h2 data-od-id="proof-heading">Teste o fluxo. Ignore o exagero.</h2>
+          <p class="lead">
+            A Relay é um produto conceitual, por isso não usa promessas
+            emprestadas nem apresenta clientes fictícios.
+          </p>
+        </div>
+        <div class="proof-slot" data-od-id="evaluation-principles">
+          <span class="meta">Padrão de avaliação</span>
+          <div class="proof-principles">
+            <div class="proof-principle">
+              <span>01</span>
+              <p>Traga uma tarefa real que você repete toda semana.</p>
+            </div>
+            <div class="proof-principle">
+              <span>02</span>
+              <p>Conclua sem sair da interface de comandos.</p>
+            </div>
+            <div class="proof-principle">
+              <span>03</span>
+              <p>Fique com a Relay apenas se o fluxo for claramente melhor.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing" data-od-id="pricing">
+      <div class="container">
+        <div class="intro">
+          <p class="eyebrow">Acesso à prévia</p>
+          <h2 data-od-id="pricing-heading">
+            Avalie o conceito completo do produto.
+          </h2>
+          <p class="lead">
+            Este protótipo não representa preços comerciais nem um fluxo de
+            pagamento.
+          </p>
+        </div>
+        <div class="preview-plan" data-od-id="preview-plan">
+          <div>
+            <span class="meta">Versão conceitual</span>
+            <h3 class="panel-title">Uma experiência completa de avaliação.</h3>
+            <p class="lead">
+              Use a interface funcional, teste a navegação e avalie o modelo
+              de interação antes de qualquer promessa de preço.
+            </p>
+          </div>
+          <ul class="preview-list" aria-label="A versão conceitual inclui">
+            <li>
+              <span>Busca por comandos</span>
+              <span class="included">Incluído</span>
+            </li>
+            <li>
+              <span>Navegação por teclado</span>
+              <span class="included">Incluído</span>
+            </li>
+            <li>
+              <span>Exemplos de fluxo</span>
+              <span class="included">Incluído</span>
+            </li>
+            <li>
+              <span>Interface responsiva</span>
+              <span class="included">Incluído</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-strip" data-od-id="cta-strip">
+      <div class="container narrow">
+        <h2>Torne sua próxima ação a mais simples.</h2>
+        <p class="lead">
+          Baixe a versão conceitual e experimente um fluxo de comandos mais
+          tranquilo.
+        </p>
+        <button class="btn btn-primary download-action" type="button" data-od-id="closing-download">
+          Baixar para macOS
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pagefoot" data-od-id="footer">
+    <div class="container pagefoot-inner">
+      <span>© 2026 Relay · Produto conceitual</span>
+      <span>Protótipo de estudo, sem conta, pagamento ou instalação.</span>
+    </div>
+  </footer>
+
+  <div class="status-toast" id="status-toast" role="status" aria-live="polite"></div>
+</body>
+
 </html>
